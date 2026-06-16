@@ -1,7 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import type { ClothingAnalysis, ScentAnalysis, OutfitSuggestion } from '../types'
 
-const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY as string)
 
 function getModel() {
   const key = localStorage.getItem('gemini_api_key') || import.meta.env.VITE_GEMINI_API_KEY as string
