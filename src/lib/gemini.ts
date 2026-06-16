@@ -4,7 +4,9 @@ import type { ClothingAnalysis, ScentAnalysis, OutfitSuggestion } from '../types
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY as string)
 
 function getModel() {
-  return genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
+  const key = localStorage.getItem('gemini_api_key') || import.meta.env.VITE_GEMINI_API_KEY as string
+  if (!key) throw new Error('No Gemini API key found. Go to Settings and add your key from aistudio.google.com')
+  return new GoogleGenerativeAI(key).getGenerativeModel({ model: 'gemini-2.0-flash' })
 }
 
 export async function analyzeClothingImage(base64Image: string, mimeType = 'image/jpeg'): Promise<ClothingAnalysis> {
